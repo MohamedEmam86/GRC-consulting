@@ -7,7 +7,7 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedService, setExpandedService] = useState<string | null>(null);
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
-  const [activeInfographicTab, setActiveInfographicTab] = useState(0);
+
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const services = [
@@ -180,33 +180,7 @@ export default function Home() {
     }
   ];
 
-  const infographics = [
-    {
-      title: 'KYC Customer Onboarding',
-      color: 'purple',
-      src: '/infographics/KYCCustomerOnboardingProcess.html'
-    },
-    {
-      title: 'AML Risk Assessment',
-      color: 'cyan',
-      src: '/infographics/AMLRiskAssessmentProcess.html'
-    },
-    {
-      title: 'Three Lines of Defense',
-      color: 'emerald',
-      src: '/infographics/ThreeLinesofDefenseModel.html'
-    },
-    {
-      title: 'Transaction Monitoring',
-      color: 'pink',
-      src: '/infographics/TransactionMonitoringWorkflow.html'
-    },
-    {
-      title: 'FATF Recommendations',
-      color: 'orange',
-      src: '/infographics/FatfRecommendation.html'
-    }
-  ];
+
 
   const usefulSites = [
     {
@@ -322,6 +296,7 @@ export default function Home() {
               <a href="#services" className="hover:text-purple-400 transition-colors">Services</a>
               <a href="#case-studies" className="hover:text-purple-400 transition-colors">Case Studies</a>
               <a href="#resources" className="hover:text-purple-400 transition-colors">Resources</a>
+              <Link href="/infographics" className="hover:text-purple-400 transition-colors">Compliance Infographics</Link>
               <Link href="/contact" className="hover:text-purple-400 transition-colors">Contact</Link>
               <a href="https://www.youtube.com/@ComplianceAI" target="_blank" rel="noopener noreferrer" className="hover:text-purple-400 transition-colors">YouTube</a>
             </div>
@@ -347,6 +322,7 @@ export default function Home() {
                 <a href="#services" className="block py-2 hover:text-purple-400 transition-colors">Services</a>
                 <a href="#case-studies" className="block py-2 hover:text-purple-400 transition-colors">Case Studies</a>
                 <a href="#resources" className="block py-2 hover:text-purple-400 transition-colors">Resources</a>
+                <Link href="/infographics" className="block py-2 hover:text-purple-400 transition-colors">Compliance Infographics</Link>
                 <Link href="/contact" className="block py-2 hover:text-purple-400 transition-colors">Contact</Link>
                 <a href="https://www.youtube.com/@ComplianceAI" target="_blank" rel="noopener noreferrer" className="block py-2 hover:text-purple-400 transition-colors">YouTube</a>
               </motion.div>
@@ -714,62 +690,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Compliance Infographics Section - Redesigned with Tabs */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800">
-        <div className="max-w-7xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold mb-16 text-center bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent"
-          >
-            Compliance Infographics
-          </motion.h2>
 
-          {/* Tab Navigation */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="flex flex-wrap gap-3 mb-12 justify-center"
-          >
-            {infographics.map((infographic, index) => (
-              <motion.button
-                key={index}
-                onClick={() => setActiveInfographicTab(index)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
-                  activeInfographicTab === index
-                    ? `bg-gradient-to-r from-${infographic.color}-500 to-${infographic.color}-600 text-white shadow-lg shadow-${infographic.color}-500/50`
-                    : 'bg-slate-700 text-gray-300 hover:bg-slate-600'
-                }`}
-              >
-                {infographic.title}
-              </motion.button>
-            ))}
-          </motion.div>
-
-          {/* Infographic Display */}
-          <motion.div
-            key={activeInfographicTab}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="bg-gradient-to-br from-slate-800 to-slate-700 p-8 rounded-2xl border border-slate-600/50 hover:border-purple-400/50 transition-all duration-300"
-          >
-            <h3 className="text-2xl font-bold mb-6 text-white">{infographics[activeInfographicTab].title}</h3>
-            <iframe
-              src={infographics[activeInfographicTab].src}
-              className="w-full h-96 rounded-lg border border-slate-600"
-              title={infographics[activeInfographicTab].title}
-            ></iframe>
-          </motion.div>
-        </div>
-      </section>
 
       {/* Useful Sites Section - New */}
       <section id="resources" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
