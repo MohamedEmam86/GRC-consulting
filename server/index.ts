@@ -12,9 +12,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Email transporter configuration
-// Using Gmail or your preferred email service
+// Using explicit SMTP settings for reliability in serverless environments
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465, // Use port 465 for secure connection (SMTPS)
+  secure: true, // true for 465, false for other ports
   auth: {
     user: process.env.EMAIL_USER || "your-email@gmail.com",
     pass: process.env.EMAIL_PASSWORD || "your-app-password",
