@@ -267,7 +267,7 @@ async function startServer() {
   });
 
   // Handle client-side routing - serve index.html for all routes
-  app.get("*", (_req: Request, res: Response) => {
+  app.get("/*", (_req: Request, res: Response) => {
     res.sendFile(path.join(staticPath, "index.html"));
   });
 
@@ -279,4 +279,5 @@ async function startServer() {
   });
 }
 
-startServer().catch(console.error);
+// startServer().catch(console.error);
+module.exports = app;
