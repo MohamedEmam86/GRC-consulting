@@ -1,6 +1,8 @@
 import { Link } from 'wouter';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Menu, X, Home as HomeIcon } from 'lucide-react';
+import { Link } from 'wouter';
+import { useState } from 'react';
 
 // Define the structure for an infographic item
 interface Infographic {
@@ -58,8 +60,58 @@ const itemVariants = {
 };
 
 export default function InfographicsList() {
+	  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
-    <div className="min-h-screen bg-slate-900 text-white pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+	    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
+	      {/* Navigation - Copied from Home.tsx */}
+	      <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-700/50">
+	        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+	          <div className="flex justify-between items-center h-16">
+	            <motion.div
+	              initial={{ opacity: 0, x: -20 }}
+	              animate={{ opacity: 1, x: 0 }}
+	              transition={{ duration: 0.5 }}
+	              className="flex items-center space-x-2"
+	            >
+	              <img src="/youtube-logo.jpg" alt="YouTube Channel Logo" className="w-10 h-10 rounded-full object-cover" />
+	              <span className="font-bold text-xl hidden sm:inline">Compliance Excellence</span>
+	            </motion.div>
+	
+	            {/* Desktop Menu */}
+	            <div className="hidden md:flex items-center space-x-8">
+	              <Link href="/" className="hover:text-purple-400 transition-colors flex items-center gap-2">
+	                <HomeIcon size={18} /> Back to Home
+	              </Link>
+	            </div>
+	
+	            {/* Mobile Menu Button */}
+	            <button
+	              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+	              className="md:hidden p-2 hover:bg-slate-700 rounded-lg transition-colors"
+	            >
+	              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+	            </button>
+	          </div>
+	
+	          {/* Mobile Menu */}
+	          <AnimatePresence>
+	            {mobileMenuOpen && (
+	              <motion.div
+	                initial={{ opacity: 0, height: 0 }}
+	                animate={{ opacity: 1, height: 'auto' }}
+	                exit={{ opacity: 0, height: 0 }}
+	                className="md:hidden pb-4 space-y-2"
+	              >
+	                <Link href="/" className="block py-2 hover:text-purple-400 transition-colors flex items-center gap-2">
+	                  <HomeIcon size={18} /> Back to Home
+	                </Link>
+	              </motion.div>
+	            )}
+	          </AnimatePresence>
+	        </div>
+	      </nav>
+	
+	      <div className="max-w-7xl mx-auto pt-32 pb-20 px-4 sm:px-6 lg:px-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -101,7 +153,7 @@ export default function InfographicsList() {
             </motion.div>
           ))}
         </motion.div>
-      </motion.div>
-    </div>
-  );
-}
+	      </motion.div>
+	    </div>
+	  );
+	}
