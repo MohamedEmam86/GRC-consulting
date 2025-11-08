@@ -134,10 +134,8 @@ export default function Contact() {
               transition={{ duration: 0.5 }}
               className="flex items-center space-x-2"
             >
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-lg flex items-center justify-center font-bold text-lg">
-                CA
-              </div>
-              <span className="font-bold text-xl hidden sm:inline">Compliance AI</span>
+              <img src="/youtube-logo.jpg" alt="YouTube Channel Logo" className="w-10 h-10 rounded-full object-cover" />
+              <span className="font-bold text-xl hidden sm:inline">Compliance Excellence</span>
             </motion.div>
 
             {/* Desktop Menu */}
@@ -204,7 +202,39 @@ export default function Contact() {
             variants={itemVariants}
             className="bg-gradient-to-br from-slate-800 to-slate-700 p-8 md:p-12 rounded-2xl border border-slate-600/50 space-y-8"
           >
-            {/* Name and Company */}
+            {/* Requested Services (Message Box) */}
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Requested Services *</label>
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleFormChange}
+                required
+                rows={5}
+                className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-400 transition-colors resize-none"
+                placeholder="Describe the services you are requesting and your project details..."
+              ></textarea>
+            </div>
+
+            {/* Services Interested In */}
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-4">Services Interested In</label>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {services.map(service => (
+                  <label key={service.id} className="flex items-center gap-3 cursor-pointer p-3 bg-slate-700/50 rounded-lg hover:bg-slate-700 transition-colors">
+                    <input
+                      type="checkbox"
+                      checked={formData.services.includes(service.id)}
+                      onChange={() => handleServiceCheckbox(service.id)}
+                      className="w-5 h-5 rounded border-slate-600 bg-slate-700 text-purple-500 focus:ring-purple-500"
+                    />
+                    <span className="text-gray-300">{service.title}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Data Fields (Name, Company, Mail, etc.) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">Full Name *</label>
@@ -232,7 +262,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Email and Phone */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">Email *</label>
@@ -259,7 +288,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Phone */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">Phone</label>
@@ -272,9 +300,19 @@ export default function Contact() {
                   placeholder="+1 (555) 000-0000"
                 />
               </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">Location (City/Region)</label>
+                <input
+                  type="text"
+                  name="location"
+                  value={formData.location}
+                  onChange={handleFormChange}
+                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-400 transition-colors"
+                  placeholder="e.g., Dubai, UAE"
+                />
+              </div>
             </div>
 
-            {/* Industry and Job Title */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">Industry</label>
@@ -286,7 +324,6 @@ export default function Contact() {
                 >
                   <option value="">Select an industry</option>
                   <option value="fintech">FinTech</option>
-                  <option value="financial">Financial Services</option>
                   <option value="ecommerce">E-Commerce</option>
                   <option value="tech">Technology</option>
                   <option value="healthcare">Healthcare</option>
@@ -306,49 +343,119 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Services Interested In */}
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-4">Services Interested In</label>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {services.map(service => (
-                  <label key={service.id} className="flex items-center gap-3 cursor-pointer p-3 bg-slate-700/50 rounded-lg hover:bg-slate-700 transition-colors">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">How did you hear about us?</label>
+                <select
+                  name="hearAbout"
+                  value={formData.hearAbout}
+                  onChange={handleFormChange}
+                  className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-purple-400 transition-colors"
+                >
+                  <option value="">Select an option</option>
+                  <option value="youtube">YouTube Channel</option>
+                  <option value="linkedin">LinkedIn</option>
+                  <option value="referral">Referral</option>
+                  <option value="search">Search Engine</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">Preferred Contact Method</label>
+                <div className="flex space-x-4 mt-3">
+                  <label className="inline-flex items-center">
                     <input
-                      type="checkbox"
-                      checked={formData.services.includes(service.id)}
-                      onChange={() => handleServiceCheckbox(service.id)}
-                      className="w-5 h-5 rounded border-slate-600 bg-slate-700 text-purple-500 focus:ring-purple-500"
+                      type="radio"
+                      name="contactMethod"
+                      value="email"
+                      checked={formData.contactMethod === 'email'}
+                      onChange={handleFormChange}
+                      className="form-radio h-4 w-4 text-purple-600 bg-slate-700 border-slate-600 focus:ring-purple-500"
                     />
-                    <span className="text-gray-300">{service.title}</span>
+                    <span className="ml-2 text-gray-300">Email</span>
                   </label>
-                ))}
+                  <label className="inline-flex items-center">
+                    <input
+                      type="radio"
+                      name="contactMethod"
+                      value="phone"
+                      checked={formData.contactMethod === 'phone'}
+                      onChange={handleFormChange}
+                      className="form-radio h-4 w-4 text-purple-600 bg-slate-700 border-slate-600 focus:ring-purple-500"
+                    />
+                    <span className="ml-2 text-gray-300">Phone</span>
+                  </label>
+                </div>
               </div>
             </div>
 
-            {/* Message */}
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Message</label>
-              <textarea
-                name="description"
-                value={formData.description}
-                onChange={handleFormChange}
-                rows={5}
-                className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-400 transition-colors resize-none"
-                placeholder="Tell us about your compliance needs, challenges, and goals..."
-              ></textarea>
-            </div>
-
-            {/* Conflict Screening Consent */}
-            <div className="space-y-4">
-              <label className="flex items-center gap-3 cursor-pointer">
+            {/* Conflict of Interest Screening */}
+            <div className="space-y-4 pt-4 border-t border-slate-600/50">
+              <h3 className="text-lg font-semibold text-white">Conflict of Interest Screening</h3>
+              <p className="text-sm text-gray-400">
+                To ensure a conflict-free engagement, please confirm the following:
+              </p>
+              <div className="space-y-3">
+                <label className="inline-flex items-center">
+                  <input
+                    type="radio"
+                    name="foodSector"
+                    value="yes"
+                    checked={formData.foodSector === 'yes'}
+                    onChange={handleFormChange}
+                    className="form-radio h-4 w-4 text-red-500 bg-slate-700 border-slate-600 focus:ring-red-500"
+                  />
+                  <span className="ml-2 text-gray-300">My company is in the Food & Beverage, FMCG, or Agricultural sector.</span>
+                </label>
+                <label className="inline-flex items-center">
+                  <input
+                    type="radio"
+                    name="foodSector"
+                    value="no"
+                    checked={formData.foodSector === 'no'}
+                    onChange={handleFormChange}
+                    className="form-radio h-4 w-4 text-green-500 bg-slate-700 border-slate-600 focus:ring-green-500"
+                  />
+                  <span className="ml-2 text-gray-300">My company is NOT in the Food & Beverage, FMCG, or Agricultural sector.</span>
+                </label>
+              </div>
+              <div className="space-y-3">
+                <label className="inline-flex items-center">
+                  <input
+                    type="radio"
+                    name="supplierPartner"
+                    value="yes"
+                    checked={formData.supplierPartner === 'yes'}
+                    onChange={handleFormChange}
+                    className="form-radio h-4 w-4 text-red-500 bg-slate-700 border-slate-600 focus:ring-red-500"
+                  />
+                  <span className="ml-2 text-gray-300">My company is a direct supplier or partner to a company in the Food & Beverage, FMCG, or Agricultural sector.</span>
+                </label>
+                <label className="inline-flex items-center">
+                  <input
+                    type="radio"
+                    name="supplierPartner"
+                    value="no"
+                    checked={formData.supplierPartner === 'no'}
+                    onChange={handleFormChange}
+                    className="form-radio h-4 w-4 text-green-500 bg-slate-700 border-slate-600 focus:ring-green-500"
+                  />
+                  <span className="ml-2 text-gray-300">My company is NOT a direct supplier or partner to a company in the Food & Beverage, FMCG, or Agricultural sector.</span>
+                </label>
+              </div>
+              <div className="flex items-start pt-4">
                 <input
                   type="checkbox"
                   name="conflictScreening"
                   checked={formData.conflictScreening}
                   onChange={handleFormChange}
-                  className="w-5 h-5 rounded border-slate-600 bg-slate-700 text-purple-500 focus:ring-purple-500"
+                  required
+                  className="form-checkbox h-5 w-5 text-purple-600 bg-slate-700 border-slate-600 rounded focus:ring-purple-500 mt-1"
                 />
-                <span className="text-sm text-gray-300">I consent to conflict of interest screening</span>
-              </label>
+                <label className="ml-3 text-sm text-gray-300">
+                  I confirm that the above information is accurate for conflict screening purposes. *
+                </label>
+              </div>
             </div>
 
             {/* Submit Button */}
