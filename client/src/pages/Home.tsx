@@ -285,10 +285,8 @@ export default function Home() {
               transition={{ duration: 0.5 }}
               className="flex items-center space-x-2"
             >
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-cyan-500 rounded-lg flex items-center justify-center font-bold text-lg">
-                CA
-              </div>
-              <span className="font-bold text-xl hidden sm:inline">Compliance AI</span>
+              <img src="/youtube-logo.jpg" alt="YouTube Channel Logo" className="w-10 h-10 rounded-full object-cover" />
+              <span className="font-bold text-xl hidden sm:inline">Compliance Excellence</span>
             </motion.div>
 
             {/* Desktop Menu */}
@@ -347,44 +345,48 @@ export default function Home() {
           ></iframe>
         </div>
 
-        {/* Hero Content */}
-        <motion.div
-          className="relative z-20 max-w-4xl mx-auto px-4 text-center"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.h1
-            variants={itemVariants}
-            className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent"
+      {/* Hero Content - New Animated Slogan */}
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="text-6xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight mb-4"
           >
-            Compliance Excellence
-          </motion.h1>
+            <span className="block">Reinventing</span>
+            <motion.span
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1.0, delay: 1.0, type: "spring", stiffness: 50 }}
+              className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400"
+            >
+              Compliance
+            </motion.span>
+            <span className="block">for Growth</span>
+          </motion.div>
           <motion.p
-            variants={itemVariants}
-            className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.5 }}
+            className="mt-6 text-xl text-slate-300 max-w-3xl mx-auto"
           >
-            Transform your governance, risk, and compliance frameworks with expert guidance tailored to your business needs
+            We help organizations navigate complex regulatory landscapes with practical, growth-enabling compliance frameworks.
           </motion.p>
           <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 2.0 }}
+            className="mt-10"
           >
-            <Link href="/contact"
-              className="px-8 py-3 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 inline-flex items-center justify-center gap-2"
-            >
-              Get Started <ArrowRight size={20} />
-            </Link>
             <a
-              href="https://www.youtube.com/@ComplianceAI"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-3 border border-cyan-400 text-cyan-400 rounded-lg font-semibold hover:bg-cyan-400/10 transition-all duration-300 inline-flex items-center justify-center gap-2"
+              href="#services"
+              className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-purple-600 hover:bg-purple-700 transition-colors shadow-lg hover:shadow-purple-500/50"
             >
-              <Play size={20} /> Watch Videos
+              See What We Do
+              <ArrowRight className="ml-3 h-5 w-5" />
             </a>
           </motion.div>
-        </motion.div>
+        </div>
 
         {/* Scroll Indicator */}
         <motion.div
@@ -674,14 +676,31 @@ export default function Home() {
                 className="group"
               >
                 <motion.div
-                  className="bg-gradient-to-br from-slate-800 to-slate-700 p-8 rounded-xl border border-slate-600/50 hover:border-cyan-400/50 transition-all duration-300 h-full hover:shadow-lg hover:shadow-cyan-500/10"
-                  whileHover={{ y: -5 }}
+                  className="relative overflow-hidden rounded-xl border border-slate-600/50 h-96"
+                  whileHover={{ scale: 1.03, boxShadow: "0 10px 20px rgba(0, 0, 0, 0.5)" }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-cyan-400 transition-colors">{study.title}</h3>
-                  <p className="text-gray-300 mb-4">{study.description}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-purple-400">Duration: {study.duration}</span>
-                    <ExternalLink size={20} className="text-cyan-400 group-hover:translate-x-1 transition-transform" />
+                  {/* Placeholder for Image/Video - Accenture style */}
+                  <div className="absolute inset-0 bg-cover bg-center transition-opacity duration-500 group-hover:opacity-30 opacity-70" style={{ backgroundImage: `url('https://picsum.photos/seed/${index}/400/600')` }}></div>
+                  
+                  {/* Content Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent p-6 flex flex-col justify-end">
+                    <h4 className="text-sm font-semibold text-cyan-400 mb-1">CASE STUDY</h4>
+                    <h3 className="text-xl font-bold mb-2 text-white transition-colors">{study.title}</h3>
+                    
+                    {/* Hidden Text on Hover */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 0, y: 20 }}
+                      whileHover={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute inset-0 p-6 flex flex-col justify-center items-center text-center bg-slate-900/90 backdrop-blur-sm"
+                    >
+                      <p className="text-gray-300 mb-4">{study.description}</p>
+                      <span className="text-sm font-medium text-purple-400 border border-purple-400 px-3 py-1 rounded-full inline-flex items-center">
+                        View Case Study <ExternalLink size={16} className="ml-2" />
+                      </span>
+                    </motion.div>
                   </div>
                 </motion.div>
               </motion.a>
