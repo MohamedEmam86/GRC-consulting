@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
-import { Menu, X, ChevronDown, ExternalLink, Play, CheckCircle, ArrowRight, BookOpen, Globe, ArrowUp } from 'lucide-react';
+import { Menu, X, ChevronDown, ExternalLink, Play, CheckCircle, ArrowRight, BookOpen, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'wouter';
+import ScrollToTopButton from '../components/ScrollToTopButton';
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -180,8 +181,6 @@ export default function Home() {
     }
   ];
 
-
-
   const usefulSites = [
     {
       category: 'International Regulatory Bodies',
@@ -273,20 +272,8 @@ export default function Home() {
     },
   };
 
-	  const ScrollToTopButton = () => (
-	    <div className="absolute top-4 right-4 z-10">
-	      <button
-	        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-	        className="p-2 bg-slate-700/50 rounded-full text-white hover:bg-purple-600 transition-colors shadow-lg"
-	        aria-label="Scroll to top"
-	      >
-	        <ArrowUp size={24} />
-	      </button>
-	    </div>
-	  );
-	
-	  return (
-	    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-700/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -357,7 +344,7 @@ export default function Home() {
           ></iframe>
         </div>
 
-      {/* Hero Content - New Animated Slogan */}
+        {/* Hero Content - New Animated Slogan */}
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -397,18 +384,19 @@ export default function Home() {
               See what we do
             </a>
 
-	            <a
-	              href="#about"
-	              className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-purple-600 hover:bg-purple-700 transition-colors shadow-lg hover:shadow-purple-500/50 transform hover:scale-105"
-	            >
-	              Who we are
-	            </a>
-	            <a
-	              href="#case-studies"
-	              className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-cyan-600 hover:bg-cyan-700 transition-colors shadow-lg hover:shadow-cyan-500/50 transform hover:scale-105"
-	            >
-	              Real-World Examples
-	            </a>          </motion.div>
+            <a
+              href="#about"
+              className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-purple-600 hover:bg-purple-700 transition-colors shadow-lg hover:shadow-purple-500/50 transform hover:scale-105"
+            >
+              Who we are
+            </a>
+            <a
+              href="#case-studies"
+              className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-cyan-600 hover:bg-cyan-700 transition-colors shadow-lg hover:shadow-cyan-500/50 transform hover:scale-105"
+            >
+              Real-World Examples
+            </a>
+          </motion.div>
         </div>
 
         {/* Scroll Indicator */}
@@ -422,7 +410,7 @@ export default function Home() {
       </section>
 
       {/* About Me Section */}
-	      <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+      <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -501,9 +489,8 @@ export default function Home() {
         </div>
       </section>
 
-	      {/* Services Section - Redesigned with Accenture-inspired layout */}
-	      <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800">
-	        <ScrollToTopButton />
+      {/* Services Section - Redesigned with Accenture-inspired layout */}
+      <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -607,9 +594,8 @@ export default function Home() {
         </div>
       </section>
 
-	      {/* Why Choose Us Section */}
-	      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
-	        <ScrollToTopButton />
+      {/* Why Choose Us Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
         <div className="max-w-7xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -642,9 +628,8 @@ export default function Home() {
         </div>
       </section>
 
-	      {/* Process Section */}
-	      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800">
-	        <ScrollToTopButton />
+      {/* Process Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800">
         <div className="max-w-7xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -687,9 +672,8 @@ export default function Home() {
         </div>
       </section>
 
-	      {/* Case Studies Section - Updated with correct YouTube links */}
-	      <section id="case-studies" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
-	        <ScrollToTopButton />
+      {/* Case Studies Section - Updated with correct YouTube links */}
+      <section id="case-studies" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
         <div className="max-w-7xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -724,12 +708,12 @@ export default function Home() {
                 >
                   {/* Placeholder for Image/Video - Accenture style */}
                   <div className="absolute inset-0 bg-cover bg-center transition-opacity duration-500 group-hover:opacity-30 opacity-70" style={{ backgroundImage: `url('https://picsum.photos/seed/${index}/400/600')` }}></div>
-                  
+
                   {/* Content Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent p-6 flex flex-col justify-end">
                     <h4 className="text-sm font-semibold text-cyan-400 mb-1">CASE STUDY</h4>
                     <h3 className="text-xl font-bold mb-2 text-white transition-colors">{study.title}</h3>
-                    
+
                     {/* Hidden Text on Hover */}
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
@@ -751,11 +735,8 @@ export default function Home() {
         </div>
       </section>
 
-
-
-	      {/* Useful Sites Section - New */}
-	      <section id="resources" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
-	        <ScrollToTopButton />
+      {/* Useful Sites Section - New */}
+      <section id="resources" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -813,9 +794,8 @@ export default function Home() {
         </div>
       </section>
 
-	      {/* FAQ Section */}
-	      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800">
-	        <ScrollToTopButton />
+      {/* FAQ Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800">
         <div className="max-w-4xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -897,10 +877,13 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-slate-700/50 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Compliance AI. All rights reserved. | Designed with precision for excellence</p>
+            <p>&copy; {new Date().getFullYear()} Compliance AI. All rights reserved. | Designed with precision for excellence</p>
           </div>
         </div>
       </footer>
+
+      {/* Single shared floating Scroll-to-Top button for the whole page */}
+      <ScrollToTopButton />
     </div>
   );
 }
