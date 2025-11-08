@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Menu, X, ChevronDown, ExternalLink, Play, CheckCircle, ArrowRight, BookOpen, Globe } from 'lucide-react';
+import { Menu, X, ChevronDown, ExternalLink, Play, CheckCircle, ArrowRight, BookOpen, Globe, ArrowUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'wouter';
 
@@ -273,8 +273,20 @@ export default function Home() {
     },
   };
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
+	  const ScrollToTopButton = () => (
+	    <div className="absolute top-4 right-4 z-10">
+	      <button
+	        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+	        className="p-2 bg-slate-700/50 rounded-full text-white hover:bg-purple-600 transition-colors shadow-lg"
+	        aria-label="Scroll to top"
+	      >
+	        <ArrowUp size={24} />
+	      </button>
+	    </div>
+	  );
+	
+	  return (
+	    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-700/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -384,19 +396,19 @@ export default function Home() {
             >
               See what we do
             </a>
-            <a
-              href="#case-studies"
-              className="inline-flex items-center justify-center px-6 py-3 border border-2 border-white/50 text-base font-medium rounded-full text-white hover:bg-white/10 transition-colors shadow-lg hover:shadow-xl transform hover:scale-105"
-            >
-              Real-World Examples
-            </a>
-            <a
-              href="#about"
-              className="inline-flex items-center justify-center px-6 py-3 border border-2 border-white/50 text-base font-medium rounded-full text-white hover:bg-white/10 transition-colors shadow-lg hover:shadow-xl transform hover:scale-105"
-            >
-              Who we are
-            </a>
-          </motion.div>
+
+	            <a
+	              href="#about"
+	              className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-purple-600 hover:bg-purple-700 transition-colors shadow-lg hover:shadow-purple-500/50 transform hover:scale-105"
+	            >
+	              Who we are
+	            </a>what we d
+	            <a
+	              href="#case-studies"
+	              className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-cyan-600 hover:bg-cyan-700 transition-colors shadow-lg hover:shadow-cyan-500/50 transform hover:scale-105"
+	            >
+	              Real-World Examples
+	            </a>          </motion.div>
         </div>
 
         {/* Scroll Indicator */}
@@ -410,7 +422,7 @@ export default function Home() {
       </section>
 
       {/* About Me Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+	      <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -489,8 +501,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Section - Redesigned with Accenture-inspired layout */}
-      <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800">
+	      {/* Services Section - Redesigned with Accenture-inspired layout */}
+	      <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800">
+	        <ScrollToTopButton />
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -594,8 +607,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+	      {/* Why Choose Us Section */}
+	      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+	        <ScrollToTopButton />
         <div className="max-w-7xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -628,8 +642,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Process Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800">
+	      {/* Process Section */}
+	      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800">
+	        <ScrollToTopButton />
         <div className="max-w-7xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -672,8 +687,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Case Studies Section - Updated with correct YouTube links */}
-      <section id="case-studies" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+	      {/* Case Studies Section - Updated with correct YouTube links */}
+	      <section id="case-studies" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+	        <ScrollToTopButton />
         <div className="max-w-7xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -737,8 +753,9 @@ export default function Home() {
 
 
 
-      {/* Useful Sites Section - New */}
-      <section id="resources" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+	      {/* Useful Sites Section - New */}
+	      <section id="resources" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+	        <ScrollToTopButton />
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -796,8 +813,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800">
+	      {/* FAQ Section */}
+	      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800">
+	        <ScrollToTopButton />
         <div className="max-w-4xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
