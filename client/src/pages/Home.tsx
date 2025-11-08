@@ -402,7 +402,7 @@ export default function Home() {
 	              className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-purple-600 hover:bg-purple-700 transition-colors shadow-lg hover:shadow-purple-500/50 transform hover:scale-105"
 	            >
 	              Who we are
-	            </a>what we d
+	            </a>
 	            <a
 	              href="#case-studies"
 	              className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-cyan-600 hover:bg-cyan-700 transition-colors shadow-lg hover:shadow-cyan-500/50 transform hover:scale-105"
