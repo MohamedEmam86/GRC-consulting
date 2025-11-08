@@ -18,9 +18,9 @@ export default function Contact() {
     description: '',
     hearAbout: '',
     contactMethod: 'email',
-    foodSector: 'no',
-    supplierPartner: 'no',
-    conflictScreening: false,
+    
+    
+    
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -87,9 +87,9 @@ export default function Contact() {
           description: '',
           hearAbout: '',
           contactMethod: 'email',
-          foodSector: 'no',
-          supplierPartner: 'no',
-          conflictScreening: false,
+          
+          
+          
         });
         setTimeout(() => setFormSubmitted(false), 5000);
       } else {
@@ -389,74 +389,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Conflict of Interest Screening */}
-            <div className="space-y-4 pt-4 border-t border-slate-600/50">
-              <h3 className="text-lg font-semibold text-white">Conflict of Interest Screening</h3>
-              <p className="text-sm text-gray-400">
-                To ensure a conflict-free engagement, please confirm the following:
-              </p>
-              <div className="space-y-3">
-                <label className="inline-flex items-center">
-                  <input
-                    type="radio"
-                    name="foodSector"
-                    value="yes"
-                    checked={formData.foodSector === 'yes'}
-                    onChange={handleFormChange}
-                    className="form-radio h-4 w-4 text-red-500 bg-slate-700 border-slate-600 focus:ring-red-500"
-                  />
-                  <span className="ml-2 text-gray-300">My company is in the Food & Beverage, FMCG, or Agricultural sector.</span>
-                </label>
-                <label className="inline-flex items-center">
-                  <input
-                    type="radio"
-                    name="foodSector"
-                    value="no"
-                    checked={formData.foodSector === 'no'}
-                    onChange={handleFormChange}
-                    className="form-radio h-4 w-4 text-green-500 bg-slate-700 border-slate-600 focus:ring-green-500"
-                  />
-                  <span className="ml-2 text-gray-300">My company is NOT in the Food & Beverage, FMCG, or Agricultural sector.</span>
-                </label>
-              </div>
-              <div className="space-y-3">
-                <label className="inline-flex items-center">
-                  <input
-                    type="radio"
-                    name="supplierPartner"
-                    value="yes"
-                    checked={formData.supplierPartner === 'yes'}
-                    onChange={handleFormChange}
-                    className="form-radio h-4 w-4 text-red-500 bg-slate-700 border-slate-600 focus:ring-red-500"
-                  />
-                  <span className="ml-2 text-gray-300">My company is a direct supplier or partner to a company in the Food & Beverage, FMCG, or Agricultural sector.</span>
-                </label>
-                <label className="inline-flex items-center">
-                  <input
-                    type="radio"
-                    name="supplierPartner"
-                    value="no"
-                    checked={formData.supplierPartner === 'no'}
-                    onChange={handleFormChange}
-                    className="form-radio h-4 w-4 text-green-500 bg-slate-700 border-slate-600 focus:ring-green-500"
-                  />
-                  <span className="ml-2 text-gray-300">My company is NOT a direct supplier or partner to a company in the Food & Beverage, FMCG, or Agricultural sector.</span>
-                </label>
-              </div>
-              <div className="flex items-start pt-4">
-                <input
-                  type="checkbox"
-                  name="conflictScreening"
-                  checked={formData.conflictScreening}
-                  onChange={handleFormChange}
-                  required
-                  className="form-checkbox h-5 w-5 text-purple-600 bg-slate-700 border-slate-600 rounded focus:ring-purple-500 mt-1"
-                />
-                <label className="ml-3 text-sm text-gray-300">
-                  I confirm that the above information is accurate for conflict screening purposes. *
-                </label>
-              </div>
-            </div>
 
             {/* Submit Button */}
             <motion.button
