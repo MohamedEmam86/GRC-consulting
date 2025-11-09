@@ -23,14 +23,153 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-      <link rel="stylesheet" href="/assets/css/grc-augment.css"/>
-</head>
+    <link rel="stylesheet" href="/assets/css/grc-augment.css"/>
+
+    <!-- Tawk.to loader styles (minimal) -->
+    <style>
+      /* Cookie / consent banner */
+      #tawk-cookie-banner {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        max-width: 360px;
+        background: #ffffff;
+        border: 1px solid rgba(0,0,0,0.08);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        padding: 14px;
+        border-radius: 10px;
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        z-index: 99999;
+      }
+      #tawk-cookie-banner p { margin: 0 0 10px 0; font-size: 14px; color: #111827; }
+      #tawk-cookie-banner .tawk-actions { display:flex; gap:8px; justify-content:flex-end; }
+      #tawk-cookie-banner button { padding:8px 10px; border-radius:6px; border: 1px solid rgba(0,0,0,0.08); background:#f3f4f6; cursor:pointer; font-weight:600; }
+      #tawk-cookie-banner button.primary { background:#0b5fff; color:#fff; border: none; }
+      /* Small floating quick-chat button (shown if user closed banner) */
+      #tawk-quick-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 24px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        box-shadow: 0 8px 24px rgba(2,6,23,0.08);
+        background: #0b5fff;
+        color: white;
+        border: none;
+        z-index: 99998;
+        cursor: pointer;
+        font-size: 20px;
+      }
+      #tawk-quick-btn.hidden { display: none; }
+    </style>
+  </head>
 
   <body>
     <div id="root"></div>
 
     <!-- React entry -->
     <script type="module" src="/src/main.tsx"></script>
-      <script src="/assets/js/grc-augment.js"></script>
-</body>
+    <script src="/assets/js/grc-augment.js"></script>
+
+    <!-- Tawk.to loader + consent logic -->
+    <script>
+      (function(){
+        var TAWK_EMBED_URL = 'https://embed.tawk.to/691053223239d4195bd8628e/1j9js9gbc';
+        // loadTawk: inject the tawk.to script once
+        function loadTawk() {
+          if (window.__TAWK_LOADED) return;
+          var s1 = document.createElement('script');
+          s1.async = true;
+          s1.src = TAWK_EMBED_URL;
+          s1.charset = 'UTF-8';
+          s1.setAttribute('crossorigin', '*');
+          document.head.appendChild(s1);
+          window.__TAWK_LOADED = true;
+        }
+
+        // Show banner only if user hasn't accepted/declined yet
+        var consent = localStorage.getItem('tawk_consent'); // 'accepted' / 'declined' or null
+        function hideBanner() {
+          var b = document.getElementById('tawk-cookie-banner');
+          if (b) b.style.display = 'none';
+        }
+        function showQuickBtn() {
+          var btn = document.getElementById('tawk-quick-btn');
+          if (btn) btn.classList.remove('hidden');
+        }
+
+        // If previously accepted -> load automatically
+        if (consent === 'accepted') {
+          loadTawk();
+        }
+
+        // Create banner markup and insert
+        var banner = document.createElement('div');
+        banner.id = 'tawk-cookie-banner';
+        banner.innerHTML = '<p><strong>Live chat (Tawk.to)</strong><br/>Allow chat to enable instant support and lead capture. We won\\'t enable the widget until you accept.</p>' +
+          '<div class="tawk-actions">' +
+          '<button id="tawk-decline">Decline</button>' +
+          '<button id="tawk-accept" class="primary">Accept & Enable Chat</button>' +
+          '</div>';
+        // Append banner only when consent not set
+        if (!consent) {
+          document.body.appendChild(banner);
+        } else {
+          // if consent set and declined, show quick button so user can enable manually
+          if (consent === 'declined') {
+            // show quick enable button (user-initiated consent)
+            showQuickBtn();
+          }
+        }
+
+        // Quick chat floating button (hidden by default)
+        var quickBtn = document.createElement('button');
+        quickBtn.id = 'tawk-quick-btn';
+        quickBtn.className = 'hidden';
+        quickBtn.title = 'Open chat';
+        quickBtn.innerHTML = '&#128172;'; // chat bubble emoji
+        document.body.appendChild(quickBtn);
+
+        // Event delegation for banner buttons
+        document.addEventListener('click', function(e){
+          var target = e.target;
+          if (!target) return;
+          if (target.id === 'tawk-accept') {
+            localStorage.setItem('tawk_consent', 'accepted');
+            loadTawk();
+            hideBanner();
+            quickBtn.classList.add('hidden');
+          } else if (target.id === 'tawk-decline') {
+            localStorage.setItem('tawk_consent', 'declined');
+            hideBanner();
+            // show quick enable button so user can opt-in later if they change mind
+            quickBtn.classList.remove('hidden');
+          } else if (target.id === 'tawk-quick-btn') {
+            // user manually opens chat -> treat as consent
+            localStorage.setItem('tawk_consent', 'accepted');
+            loadTawk();
+            quickBtn.classList.add('hidden');
+            hideBanner();
+          }
+        }, false);
+
+        // wire quickBtn click handler separately (some browsers won't treat innerHTML clicks)
+        quickBtn.addEventListener('click', function(){
+          localStorage.setItem('tawk_consent', 'accepted');
+          loadTawk();
+          quickBtn.classList.add('hidden');
+          hideBanner();
+        }, false);
+
+        // If user previously declined, show quick button so they can opt-in manually
+        if (consent === 'declined') {
+          quickBtn.classList.remove('hidden');
+        }
+      })();
+    </script>
+  </body>
 </html>
